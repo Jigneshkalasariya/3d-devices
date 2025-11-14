@@ -1,0 +1,61 @@
+<div class="container">
+  <mat-card class="table-card">
+    <mat-card-header>
+      <mat-card-title>Devices</mat-card-title>
+      <button mat-raised-button color="primary" (click)="openAddDialog()" style="margin-left: auto;">
+        <mat-icon>add</mat-icon> Add Device
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="devices" class="device-table">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let device">{{ device.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let device">{{ device.type }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let device">
+            <span [class]="'status-badge status-' + device.status.toLowerCase()">
+              {{ device.status }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let device" (click)="$event.stopPropagation()">
+            <button mat-icon-button color="primary" (click)="openEditDialog(device)" title="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteDevice(device)" title="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr 
+          mat-row 
+          *matRowDef="let row; columns: displayedColumns;"
+          (click)="onRowClick(row)"
+          class="clickable-row"
+        ></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="canvas-card">
+    <mat-card-header>
+      <mat-card-title>3D View</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <canvas #canvas></canvas>
+    </mat-card-content>
+  </mat-card>
+</div>
