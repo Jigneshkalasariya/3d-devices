@@ -243,7 +243,7 @@ export class DeviceViewerComponent implements OnInit, OnDestroy {
   template: `
     <h2 mat-dialog-title>{{ data.mode === 'add' ? 'Add Device' : 'Edit Device' }}</h2>
     <mat-dialog-content>
-      <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;">
+      <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;margin-top: 16px;">
         <mat-label>Name</mat-label>
         <input matInput [(ngModel)]="formData.name" required>
       </mat-form-field>
